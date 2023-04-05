@@ -1,0 +1,73 @@
+<% layout('./layout/boilerplate') -%>
+
+    <div class="row">
+        <div class="col-lg-4">
+
+            <h1 class="text-center">
+                <%=product.name%>
+            </h1>
+            <div class="card col-4 mx-auto shadow" style="width: 23rem; margin: 10px; padding: 0;">
+                <img src="<%=product.img%>" class="card-img-top" alt="..." style="height : 220px">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 1.8rem;">
+                        <%=product.name%>
+                    </h5>
+                    <h5 class="card-text">Price :
+                        <%=product.price%>
+                    </h5>
+                    <p class="card-text">
+                        <%=product.decription%>
+                    </p>
+                    <!-- <a href="<%=product._id%>" class="btn btn-primary">Show Product</a> -->
+                    <div style="display: flex;">
+                        <a href="/products/<%=product._id%>/edit" class="btn btn-success" style="margin-right: 8px;">Edit</a>
+                        <form action="/products/<%=product._id%>?_method=DELETE" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mx-auto border shadow p-3 w-75 mt-4 ">
+                <h2 class="text-center">Reviews</h2>
+                <hr class="mt-2 mb-3">
+                <%for(const rev of product.review){%>
+                    <div class="card mt-2 p-2">
+                        <h5 class="card-title">
+                            Ratings :
+                            <%= rev.rating%>&#9733;
+                                <form action="/products/<%= product._id%>/review/<%=rev._id%>?_method=DELETE" method="post" style="display: inline;">
+                                    <button class="fa fa-trash btn" type="submit" aria-hidden="true" style="float: right; color: #dc3545;"></button>
+                                </form>
+                        </h5>
+                        <p class="card-text">
+                            Comment :
+                            <%= rev.comment %>
+                        </p>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+        <div class="col-lg-4">
+
+            <form class="mx-auto border shadow p-3 w-75 mt-4" style="box-shadow: 0 0 10px gray; border-radius: 5px;" action="/products/<%=product._id%>/review" method="post">
+                <h2 class="text-center">Add Comments</h2>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Ratings <span id="inputtext" style="position: relative; left : 250px"></span> </label>
+                    <input type="range" class="form-control form-range" name="rating" id="rating" placeholder="" min="1" max="5" step=".1">
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                </div>
+
+
+                <button class="btn btn-primary">Add Review</button>
+            </form>
+
+
+        </div>
+
+    </div>
