@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV != 'production') {
-    require('dotenv').config({ path: './config.env' });
-}
+// if (process.env.NODE_ENV != 'production') {
+//     require('dotenv').config({ path: './config.env' });
+// }
 
 
 const express = require('express');
@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const productRouter = require('./routes/productRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -21,9 +22,9 @@ const User = require('./models/User');
 
 
 
-const dburl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/shopping-app';
+const dburl = 'mongodb://127.0.0.1:27017/shopping-app';
 
-mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dburl,)
     .then(() => {
         console.log('DB is connected');
     })
@@ -35,9 +36,9 @@ mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
 const app = express();
 
 // const PORT = 5000;
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 
-const session_secret = process.env.SESSION_SECRET || 'this is a secret session'
+const session_secret = 'this is a secret session'
 
 const sessionflash = {
     secret: session_secret,
@@ -106,6 +107,8 @@ app.use(authRoutes);
 app.use(productRouter);
 
 app.use(reviewRouter);
+
+app.use(cartRoutes);
 
 
 

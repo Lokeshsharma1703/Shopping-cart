@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Review = require('../models/Reviews');
 const Product = require('../models/Product');
+const User = require('../models/User');
 const { isLoggedIn } = require('../middleware');
 
 
@@ -29,6 +30,17 @@ router.delete('/products/:productid/review/:reviewid', isLoggedIn, async (req, r
     product.review = rev;
     product.save();
     res.redirect(`/products/${productid}`);
+})
+
+
+router.post('/products/:productid/addcart', isLoggedIn, async (req, res) => {
+    const { productid } = req.params;
+
+    const user = await req.user;
+    user.products.push(productid);
+    await user.save();
+
+    res.redirect('/products');
 })
 
 

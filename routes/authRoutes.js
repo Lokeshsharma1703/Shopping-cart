@@ -13,9 +13,11 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
-    const user = new User({ username, email });
+    const retailer = req.body.retailer === 'on' ? true : false;
+    const consumer = req.body.consumer === 'on' ? true : false;
+    const user = new User({ username, email, retailer, consumer });
 
-    const newUser = await User.register(user, password);
+    const newUser = await User.register(user, password).populate('products');;
 
     req.flash('success', 'You have registered successfully');
 

@@ -18,6 +18,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link text-capitalize">Hi, <%= currentUser.username %>!</a>
                 </li>
+                <a href="/products/user/cart"><li class="nav-item"><i class="fa fa-shopping-cart" aria-hidden="true" style="margin: 0 20px; color: white;"></i><sup style="background-color: red; font-size: 13px; padding: 0 5px; border-radius: 50%; position: relative; right: 23px; color: white;"><%=currentUser.products.length%></sup></li></a>
                 <li style="background-color:#0000007e;box-sizing:border-box;  border-radius: 5px;margin-left:30px; height: 45px; padding: 1px 10px 1px 10px;" class="nav-item">
                     <a style="color:#e7e6e6;font-size:18px"  class="nav-link" href="/logout">Logout</a>
                 </li>
