@@ -4,6 +4,7 @@
 
 # Files
 .env
+.env.example
 combined.log
 .idea
 
