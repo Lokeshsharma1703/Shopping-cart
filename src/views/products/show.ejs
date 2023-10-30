@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <div class="col-lg-4">
+    <div class="col-lg-5">
       <div class="card mx-auto mb-3" style="width: 23rem">
         <img
           src="<%=product.imageUrl%>"
@@ -73,8 +73,8 @@
           class="form-control"
           name="comment"
           id="comment"
-          cols="15"
-          rows="5"
+          cols="10"
+          rows="3"
         ></textarea>
       </div>
       <button class="btn btn-sm btn-dark">Submit</button>
@@ -83,11 +83,17 @@
       <% for(const review of product.reviews){ %>
       <div class="card mb-2">
         <div class="card-body">
+          <h5 class="card-title text-capitalize"><%= review.authorname%></h5>
           <p class="starability-result" data-rating="<%=review.rating%>">
             Rated: <%=review.rating%> stars
           </p>
           <p><%=review.comment%></p>
-          <button class="btn btn-sm btn-danger">Delete</button>
+          <form
+            method="post"
+            action="/api/v1/products/<%=product._id%>/review/<%=review._id%>?_method=DELETE"
+          >
+            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+          </form>
         </div>
       </div>
       <% } %>
